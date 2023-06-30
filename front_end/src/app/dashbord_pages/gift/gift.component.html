@@ -70,12 +70,10 @@
         <mat-card-title>{{gift.nomeRegalo}}</mat-card-title>
         <mat-card-subtitle>{{gift.descrizione}}</mat-card-subtitle>
       </mat-card-header>
-      <img mat-card-image src="https://bebraveboutique.it/cdn/shop/products/istockphoto-1128262881-170667a.jpg?v=1648818692"
+      <img mat-card-image src="https://freeiconshop.com/wp-content/uploads/edd/gift-flat.png"
         alt="Photo of a Shiba Inu">
       <mat-card-content>
-        <p>
-          PUNTI :{{gift.numeroPunti}}
-        </p>
+        <mat-card-subtitle>PUNTI :{{gift.numeroPunti}}</mat-card-subtitle>
       </mat-card-content>
       <mat-card-actions>
         <button mat-button (click)="modificaRegali(gift.id)">MODIFICA</button>

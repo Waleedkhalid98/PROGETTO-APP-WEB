@@ -1,12 +1,6 @@
-<!-------------- ACCOUNT USER ------------->
-
-
-
-
-
 <!-------------- ACCOUNT EMPLOYEE ------------->
 
-<div class="login page" *ngIf="isUser==false">
+<div class="account" *ngIf="isUser==false">
     <button mat-button class="custom-button" (click)="mostraUtenti()"> VISUALIZZA UTENTI </button>
     <button mat-button class="custom-button" (click)="creaUtenti()"> CREA UTENTI </button>
     <button mat-button class="custom-button" (click)="eliminaUtenti()"> ELIMINA UTENTI </button>
@@ -75,8 +69,9 @@
             </mat-tab>
         </mat-tab-group>
     </div>
-    <!-- TABELLA UTENTI -->
 
+    <!-- TABELLA UTENTI -->
+    
     <table mat-table [dataSource]="TabUser" class="mat-elevation-z8" *ngIf="mostraCarta">
         <!-- Definizioni delle colonne -->
         <ng-container matColumnDef="id">
@@ -103,8 +98,5 @@
         <!-- Righe della tabella -->
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-
-    
-
 
 </div>

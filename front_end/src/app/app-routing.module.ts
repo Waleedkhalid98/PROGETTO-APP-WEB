@@ -29,12 +29,8 @@ const routes: Routes = [
   {
     path: 'dash/user', component: DashbordPagesComponent,
     children: [
-      {path: 'account', component : AccountComponent},
       {path: 'card', component : CardComponent},
       {path: 'gift', component : GiftComponent},
-
-
-
     ]
   }
 
