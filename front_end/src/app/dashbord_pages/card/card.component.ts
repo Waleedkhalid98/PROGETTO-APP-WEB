@@ -162,7 +162,7 @@ export class CardComponent implements OnInit {
     );
   }
 
-  displayedColumns: string[] = ['idUtente', 'codice', 'punti'];
+  displayedColumns: string[] = ['id','idUtente', 'codice', 'punti'];
   //metodo per creare carta
   button() {
     const nome = this.form.value.nome;

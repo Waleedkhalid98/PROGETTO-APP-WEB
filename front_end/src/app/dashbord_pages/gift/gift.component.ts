@@ -50,7 +50,7 @@ export class GiftComponent implements OnInit {
   }
   //METODI CHE CAMBIANO LE CONDIZIONI PER VISUALIZZARE I DIV 
   modificaRegali(giftId: Number) {
-    this.modificaRegalo = true
+    this.modificaRegalo = !this.modificaRegalo
     this.creaRegalo = false
     this.eliminaRegalo = false
     this.mostraRegalo = false
@@ -73,7 +73,7 @@ export class GiftComponent implements OnInit {
   }
 
   mostraRegali() {
-    this.mostraRegalo = true
+    this.mostraRegalo = !this.mostraRegalo
     this.eliminaRegalo = false
     this.creaRegalo = false
     this.modificaRegalo = false

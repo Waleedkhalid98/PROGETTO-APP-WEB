@@ -63,7 +63,7 @@
 
 
 
-  <div class="card-container">
+  <div class="card-container" *ngIf="mostraRegalo">
     <mat-card class="example-card" *ngFor=" let gift of cardGift">
       <mat-card-header>
         <div mat-card-avatar class="example-header-image"></div>
@@ -84,7 +84,7 @@
 
   <div class="login page" *ngIf="modificaRegalo" >
     <div>
-      <mat-card-title style="text-align:center;">Regalo</mat-card-title>
+      <mat-card-title style="text-align:center;">Modifica Regalo</mat-card-title>
       <mat-tab-group mat-stretch-tabs class="example-stretched-tabs">
         <mat-tab>
           <mat-card-content>
@@ -123,7 +123,7 @@
 
 <!-------------- SEZIONE REGALO USER ------------->
 <div *ngIf="!isEmployee && userType">
-  <h2 >PREMI DISPONIBILI</h2>
+  <h2 >REGALI DISPONIBILI</h2>
   <div class="card-container">
 
     <mat-card class="example-card" *ngFor=" let gift of cardGift">
