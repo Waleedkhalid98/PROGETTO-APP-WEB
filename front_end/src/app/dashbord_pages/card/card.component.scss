@@ -1,0 +1,107 @@
+.login-page {
+    background-size: cover;
+    
+    top: 0;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+   
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+}
+
+mat-card {
+    width: 30%;
+    margin: 10% auto;
+    border-radius: 8px;
+}
+
+mat-form-field,
+mat-checkbox {
+    width: 80%;
+    display: block;
+    margin: auto;
+}
+
+mat-card-content {
+    margin-top: 20px;
+}
+
+.login-button {
+    margin-top: 20px;
+    display: block;
+    width: 80%;
+    margin: 20px auto;
+}
+
+// rendo la carta cliente migliore 
+
+.example-card {
+    margin-top: 20px; /* Aggiunge uno spazio sopra la carta */
+    background-color: #37b3c9; /* Colore di sfondo */
+    border-radius: 8px; /* Angoli arrotondati */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombra */
+    
+  }
+  
+  .mat-card-header {
+    background-color: #4285F4; /* Colore di sfondo dell'intestazione */
+    color: white; /* Colore del testo nell'intestazione */
+  }
+  
+  .mat-card-content {
+    padding: 16px; /* Padding per il contenuto della carta */
+  }
+  
+  .mat-card-actions {
+    justify-content: flex-end; /* Allinea i pulsanti verso destra */
+  }
+  
+  .mat-card-actions button {
+    margin-left: 8px; /* Aggiunge uno spazio tra i pulsanti */
+  }
+  
+  .mat-card-image {
+    max-height: 200px; /* Altezza massima dell'immagine */
+    object-fit: cover; /* Adatta l'immagine alla dimensione del contenitore */
+    border-top-left-radius: 8px; /* Angoli arrotondati per l'immagine */
+    border-top-right-radius: 8px;
+  }
+
+
+  //bottoni per modifica punti 
+  .custom-button {
+    background-color: #4285F4; /* Colore di sfondo */
+    color: white; /* Colore del testo */
+    padding: 10px 20px; /* Padding per aumentare la dimensione del bottone */
+    border-radius: 4px; /* Angoli arrotondati */
+    transition: background-color 0.3s; /* Transizione per l'effetto di evidenziazione */
+  }
+  
+  .custom-button:hover {
+    background-color: #3367D6; /* Colore di sfondo evidenziato al passaggio del mouse */
+  }
+
+
+
+  .mat-elevation-z8{
+    margin-top: 30px;
+  }
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  

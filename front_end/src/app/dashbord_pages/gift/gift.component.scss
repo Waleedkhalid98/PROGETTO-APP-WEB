@@ -1,0 +1,102 @@
+.login-page {
+    background-size: cover;
+    background-image: url("https://png.pngtree.com/background/20230524/original/pngtree-background-blurred-blue-light-with-movement-business-presentation-vector-template-used-picture-image_2712412.jpg");
+    top: 0;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    background-color: #303F9F;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+}
+
+mat-card {
+    width: 30%;
+    margin: 10% auto;
+    border-radius: 8px;
+}
+
+mat-form-field,
+mat-checkbox {
+    width: 80%;
+    display: block;
+    margin: auto;
+}
+
+mat-card-content {
+    margin-top: 20px;
+}
+
+.login-button {
+    margin-top: 20px;
+    display: block;
+    width: 80%;
+    margin: 20px auto;
+}
+// tabella con i regali 
+table {
+    width: 100%;
+  }
+
+// personalizzo i bottoni per i gift
+.custom-button {
+    background-color: #4285F4; /* Colore di sfondo */
+    color: white; /* Colore del testo */
+    padding: 10px 20px; /* Padding per aumentare la dimensione del bottone */
+    border-radius: 4px; /* Angoli arrotondati */
+    transition: background-color 0.3s; /* Transizione per l'effetto di evidenziazione */
+  }
+  
+  .custom-button:hover {
+    background-color: #3367D6; /* Colore di sfondo evidenziato al passaggio del mouse */
+  }
+
+  //carte per visualizzare i regali
+
+  
+
+  .card-container {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap; /* Gestisce il wrapping delle carte su più righe */
+  }
+    
+  .example-card {
+    width: 300px;
+    margin-right: 20px;
+    margin-bottom: 20px; /* Aggiunge uno spazio inferiore tra le carte */
+    background-color: #37b3c9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+   
+  }
+  
+  .example-card .mat-card-header {
+    background-color: #4285F4;
+    color: white;
+  }
+  
+  .example-card .mat-card-content {
+    padding: 16px;
+  }
+  
+  .example-card .mat-card-actions {
+    justify-content: flex-end;
+  }
+  
+  .example-card .mat-card-actions button {
+    margin-left: 8px;
+  }
+  
+  .example-card .mat-card-image {
+    max-height: 200px;
+    object-fit: cover;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+  }
+  
+  
