@@ -18,13 +18,12 @@ require("./routes/card_routers")(app)
 
 
 db.sync().then(() => {
-    console.log('db sincronizzato');
+    console.log('online');
 }).catch((err) => {
-    console.log('errore sincronizzazione' + err.message)
+    console.log('error' + err.message)
 });
 
 
 
 
 app.listen(3000)
-console.log("server start")
