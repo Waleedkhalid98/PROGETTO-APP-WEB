@@ -1,7 +1,5 @@
 import { Injectable } from "@angular/core";
 import { CanActivate, Router } from "@angular/router";
-import { Employee } from "src/app/models/employee";
-import { User } from "src/app/models/user";
 import { UserService } from "src/app/service/user.service";
 import { AuthService } from "./auth.service";
 
@@ -18,12 +16,10 @@ constructor(
     private userService: UserService
   ) { }
 
-  /**
-   * Il metodo canActivate ritorna true solo quando il percorso può essere navigato.
-   * In caso di false (l'utente non è autenticato), la navigazione può essere reindirizzata alla home.
-   * @returns 
-   */
- 
+  
+    
+   
+ //controlla token per il permesso alla rotta
 canActivate(): boolean {
     if (!this.authService.isAuthenticated() || this.userService.getUser() == null) {
       this.router.navigate(['home']);

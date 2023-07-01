@@ -173,6 +173,7 @@ export class GiftComponent implements OnInit {
 }
 
   displayedColumns: string[] = ['id', 'nome', 'cognome', 'email'];
+
   //BOTTONE CHE PERMETTE DI CREARE DEI PREMI 
   button() {
     const token = localStorage.getItem('accessToken');

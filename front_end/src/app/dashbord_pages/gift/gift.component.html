@@ -6,7 +6,7 @@
 
   <!--------------CREA REGALO  ------------->
 
-  <div class="login page" *ngIf="creaRegalo">
+  <div *ngIf="creaRegalo">
     <div>
       <mat-card-title style="text-align:center;">Regalo</mat-card-title>
       <mat-tab-group mat-stretch-tabs class="example-stretched-tabs">
@@ -40,7 +40,7 @@
 
   <!--------------ELIMINA REGALO  ------------->
 
-  <div class="login page" *ngIf="eliminaRegalo">
+  <div *ngIf="eliminaRegalo">
     <div>
       <mat-card-title style="text-align:center;">Regalo</mat-card-title>
       <mat-tab-group mat-stretch-tabs class="example-stretched-tabs">
@@ -69,12 +69,12 @@
       <mat-card-header>
         <div mat-card-avatar class="example-header-image"></div>
         <mat-card-title>{{gift.nomeRegalo}}</mat-card-title>
-        <mat-card-subtitle>{{gift.descrizione}}</mat-card-subtitle>
+        <mat-card-subtitle>PUNTI :{{gift.numeroPunti}}</mat-card-subtitle>
       </mat-card-header>
       <img mat-card-image src="https://freeiconshop.com/wp-content/uploads/edd/gift-flat.png"
         alt="foto regalo">
       <mat-card-content>
-        <mat-card-subtitle>PUNTI :{{gift.numeroPunti}}</mat-card-subtitle>
+        <mat-card-subtitle>{{gift.descrizione}}</mat-card-subtitle>
       </mat-card-content>
       <mat-card-actions>
         <button mat-button (click)="modificaRegali(gift.id)">MODIFICA</button>
@@ -92,18 +92,13 @@
             <form [formGroup]="form">
               <mat-form-field>
                 <input matInput placeholder="nomeRegalo" formControlName="nomeRegalo">
-
               </mat-form-field>
               <mat-form-field>
                 <input matInput placeholder="descrizione" formControlName="descrizione">
-
               </mat-form-field>
-
               <mat-form-field>
                 <input matInput placeholder="numeroPunti" formControlName="numeroPunti">
-
               </mat-form-field>
-
               <button mat-raised-button color="primary" class="login-button" >
                 modifica
               </button>

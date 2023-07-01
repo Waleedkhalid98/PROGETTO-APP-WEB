@@ -52,13 +52,13 @@ export class DashbordPagesComponent {
         response => {
           this.response = response;
           if (this.response.status == 200) {
-            alert("Logout Successfully");
+            alert("Logout avvenuto con successo");
             this.router.navigate(['home']);
           } else {
-            alert("Logout Failed");
+            alert("Logout fallito");
           }
         }, err => {
-          alert("Logout Failed");
+          alert("Logout fallito");
         }
       );
     }
@@ -67,13 +67,13 @@ export class DashbordPagesComponent {
         response => {
           this.response = response;
           if (this.response.status == 200) {
-            alert("Logout Successfully");
+            alert("Logout avvenuto con successo");
             this.router.navigate(['home']);
           } else {
-            alert("Logout Failed");
+            alert("Logout fallito");
           }
         }, err => {
-          alert("Logout Failed");
+          alert("Logout fallito");
         }
       );
     }

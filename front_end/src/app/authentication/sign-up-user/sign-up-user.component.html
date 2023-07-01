@@ -2,9 +2,9 @@
 <div class="login-page">
     <a routerLink="/home" class="btn">HOME</a>
     <mat-card class="mat-elevation-z12">
-        <mat-card-title style="text-align:center;">SignIn/SignUp</mat-card-title>
+        <mat-card-title style="text-align:center;">Accedi/registrati</mat-card-title>
         <mat-tab-group mat-stretch-tabs class="example-stretched-tabs">
-            <mat-tab label="Sign In">
+            <mat-tab label="Accedi">
                 <mat-card-content>
                     <form [formGroup]="form">
                         <mat-form-field>
@@ -15,19 +15,19 @@
                             <input matInput placeholder="Password" type="password" formControlName="password">
                             <mat-icon matSuffix>lock</mat-icon>
                         </mat-form-field>
-                        <button mat-raised-button color="primary" class="login-button" (click)="onSubmit()">
-                            Sign In
+                        <button mat-raised-button color="primary" class="login-button" (click)="logIn()">
+                            Accedi
                         </button>
-                        <a href="/sign_up_employees">Team shop</a>
+                        <a href="/sign_up_employees">AMMINISTRATORE</a>
 
                     </form>
                 </mat-card-content>
             </mat-tab>
-            <mat-tab label="Sign Up">
+            <mat-tab label="Registrazione">
                 <mat-card-content>
                     <form [formGroup]="form">
                         <mat-form-field>
-                            <input matInput placeholder="User Name" formControlName="nome">
+                            <input matInput placeholder="nome" formControlName="nome">
                             <mat-icon matSuffix>perm_identity</mat-icon>
 
                         </mat-form-field>
@@ -54,7 +54,7 @@
                             <mat-icon matSuffix>lock</mat-icon>
                         </mat-form-field>
                         <button mat-raised-button color="primary" class="login-button" (click)="button()">
-                            Sign Up
+                            registrati
                         </button>
                     </form>
                 </mat-card-content>

@@ -83,7 +83,7 @@ displayedColumns: string[] = ['nome', 'cognome', 'email','password'];
     console.log('funzia')
 }
 
-onSubmit() {
+logIn() {
   const email = this.form.value.email;
   const password = this.form.value.password;
   this.httpclient.post(`${enviroment.baseUrl}/user/logIn`, { email: email, password: password }).subscribe(
@@ -93,13 +93,13 @@ onSubmit() {
         const userLogged = new User(this.response.data.id, this.response.data.nome, this.response.data.cognome, this.response.data.email);
         this.userService.setUser(userLogged);
         this.authService.saveToken(this.response.accessToken, this.response.refreshToken);
-        alert("Login successful");
+        alert("Log In avvenuto con successo");
         this.router.navigate(['dash/user']);
       } else {
-        alert("Password or email not correct.");
+        alert("Password o email non corretti");
       }
     }, err => {
-      alert('Password or email not correct.');
+      alert('Password or email non corretti');
     }
   );
 }

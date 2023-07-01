@@ -7,42 +7,46 @@
         <a href="/home" class="btn">home</a>
         <div class="btn2-container">
             <button class="btn2" (click)="logout()">Log out</button>
-          </div>
+        </div>
 
     </mat-toolbar-row>
 </mat-toolbar>
+
+<!--DASH EMPLOYEE-->
 
 <mat-sidenav-container>
     <mat-sidenav [(opened)]="opened" mode="side">
         <div *ngIf="isEmployee && userType">
             <mat-nav-list>
-                <button   class="rr" mat-list-item routerLink="/dash/employee">
+                <button class="rr" mat-list-item routerLink="/dash/employee">
 
                     <span class="text-white">Home</span>
                 </button>
                 <button class="rr" mat-list-item routerLink="/dash/employee/account">
                     <span class="text-white">Account</span>
-                </button>           
+                </button>
                 <button class="rr" mat-list-item routerLink="/dash/employee/card">
                     <span class="text-white">Card</span>
                 </button>
-               
+
                 <button class="rr" mat-list-item routerLink="/dash/employee/gift">
                     <span class="text-white">Gift</span>
                 </button>
             </mat-nav-list>
         </div>
 
+        <!--DASH USER-->
+
         <div *ngIf="!isEmployee && userType">
             <mat-nav-list>
                 <button class="rr" mat-list-item routerLink="/dash/user">
                     <span class="text-white"> Home</span>
                 </button>
-                
+
                 <button class="rr" mat-list-item routerLink="/dash/user/card">
-                    <span class="text-white" >Card</span>
+                    <span class="text-white">Card</span>
                 </button>
-                
+
                 <button class="rr" mat-list-item routerLink="/dash/user/gift">
                     <span class="text-white">Gift</span>
                 </button>
@@ -50,7 +54,7 @@
         </div>
 
 
-      
+
 
     </mat-sidenav>
     <mat-sidenav-content>

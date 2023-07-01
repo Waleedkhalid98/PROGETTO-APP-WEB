@@ -38,7 +38,7 @@ export class LoginEmployeesComponent implements OnInit {
     })
   }
   
-  onSubmit() {
+  logIn() {
     const codice = this.form.value.codice;
     const password = this.form.value.password;
     this.httpClient.post(`${enviroment.baseUrl}/employee/logIn`, {
@@ -51,13 +51,13 @@ export class LoginEmployeesComponent implements OnInit {
           const employeeLogged = new Employee(this.response.data.id, this.response.data.codice);
           this.userService.setUser(employeeLogged);
           this.authService.saveToken(this.response.accessToken, this.response.refreshToken);
-          alert("Login successful");
+          alert("Log In avvenuto con successo");
           this.router.navigate(['dash/employee']);
         } else {
-          alert("Password not correct.");
+          alert("Password o codice non corretti.");
         }
       }, err => {
-        alert('Password not correct.');
+        alert('Password o codice non corretti.');
       }
     );
   }

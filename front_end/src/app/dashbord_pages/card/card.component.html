@@ -1,6 +1,6 @@
 <!-------------- CARD USER ------------->
 
-<div class="login-page" *ngIf="!isEmployee && userType && possiediCarta" >
+<div  *ngIf="!isEmployee && userType && possiediCarta" >
     <h2>CARTA FEDELTA'</h2>
    <div *ngIf="card && userType ">
     <mat-card class="example-card">
@@ -27,7 +27,7 @@
 
 <!-------------- CARD EMPLOYEE ------------->
 
-<div class="login page" *ngIf="isEmployee && userType">
+<div *ngIf="isEmployee && userType">
     <button mat-button class="custom-button" (click)="creaCarte()"> CREA CARTA</button>
     <button mat-button class="custom-button" (click)="mostraEliminaCarte() "> ELIMINA CARTA</button>
     <button mat-button class="custom-button" (click)="mostraVisualizzaCarte()"> VISUALIZZA CARTE</button>
@@ -72,7 +72,7 @@
 
 
     <!-------------- SOTTRAI PUNTI ------------->
-    <div class="login page" *ngIf="mostraSottraiCarta">
+    <div *ngIf="mostraSottraiCarta">
         <div>
             <mat-card-title style="text-align:center;">Sottrai Punti</mat-card-title>
             <mat-tab-group mat-stretch-tabs class="example-stretched-tabs">
@@ -100,7 +100,7 @@
     </div>
 
     <!-- AGGIUNGI PUNTI -->
-    <div class="login page" *ngIf="mostraAggiungiCarta">
+    <div *ngIf="mostraAggiungiCarta">
         <div>
             <mat-card-title style="text-align:center;">Aggiungi Punti</mat-card-title>
             <mat-tab-group mat-stretch-tabs class="example-stretched-tabs">
