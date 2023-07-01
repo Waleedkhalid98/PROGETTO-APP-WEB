@@ -37,8 +37,7 @@ export class AuthService {
   }
 
 
-  //Verifica se il token JWT è presente nella cache locale del browser. Se il token non esiste 
-  //viene reindirizzato alla home, altrimenti torna true indicando che l'utente è autenticato.
+  
   isAuthenticated(): boolean {
     const token = localStorage.getItem('accessToken');
     if (!token) {

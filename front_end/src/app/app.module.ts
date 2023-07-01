@@ -36,7 +36,8 @@ import { DashbordPagesComponent } from './dashbord_pages/dashbord-pages.componen
 import { AccountComponent } from './dashbord_pages/account/account.component';
 import { CardComponent } from './dashbord_pages/card/card.component';
 import { GiftComponent } from './dashbord_pages/gift/gift.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
+import { JwtInterceptor } from './authentication/services/auth.interceptor';
 
 
 @NgModule({
@@ -79,7 +80,14 @@ import { HttpClientModule } from '@angular/common/http';
     
 
   ],
-  providers: [],
+  providers: [
+    {
+      provide:HTTP_INTERCEPTORS,
+      useClass:JwtInterceptor,
+      multi:true
+    }
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

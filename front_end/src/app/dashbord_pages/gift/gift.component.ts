@@ -49,12 +49,11 @@ export class GiftComponent implements OnInit {
 
   }
   //METODI CHE CAMBIANO LE CONDIZIONI PER VISUALIZZARE I DIV 
-  modificaRegali(giftId: Number) {
+  modificaRegali(giftId: Number ) {
     this.modificaRegalo = !this.modificaRegalo
     this.creaRegalo = false
     this.eliminaRegalo = false
     this.mostraRegalo = false
-    console.log('Gift ID:', giftId);
   }
 
   mostraCreaGift() {

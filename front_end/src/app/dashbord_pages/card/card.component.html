@@ -9,21 +9,21 @@
             <mat-card-title>ID CARTA: {{card.id}}</mat-card-title>
             <mat-card-subtitle> PUNT DISPONIBILI:{{card.punti}}</mat-card-subtitle>
         </mat-card-header>
-        <img mat-card-image src="https://www.centrocard.it/img/Card/Bishop_retro_big.jpg" alt="Photo of a Shiba Inu">
+        <img mat-card-image src="https://www.centrocard.it/img/Card/Bishop_retro_big.jpg" alt="carta fedeltà">
         <mat-card-content>
             <p>
-                
+            CARTA FEDELTA' HIGH TECH 
             </p>
         </mat-card-content>
     </mat-card>
    </div>
 
-   <div *ngIf="!isEmployee && userType && !possiediCarta">
+</div>
+
+<div *ngIf="!isEmployee && userType && !possiediCarta">
     <h2 >"NON POSSIEDI LA CARTA"</h2>
    </div>
     
-
-</div>
 
 <!-------------- CARD EMPLOYEE ------------->
 
