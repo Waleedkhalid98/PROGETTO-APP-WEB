@@ -106,7 +106,7 @@ exports.eliminaPremi =(request, response)=>{
 
 }
 
-exports.modificaPremio = (request, response) => {
+exports.modificaPremio =async (request, response) => {
     const idPremio = request.params.id;
   
     const nomeRegalo = request.body.nomeRegalo;
@@ -115,42 +115,34 @@ exports.modificaPremio = (request, response) => {
   
     if (nomeRegalo === '' || descrizione === '' || numeroPunti === '') {
       response.status(401).send({
-        status: 401,
+        status: 404,
         messaggio: 'dati assenti',
       });
       
     }
   
-    const updatedGift = {
-      nomeRegalo: nomeRegalo,
-      descrizione: descrizione,
-      numeroPunti: numeroPunti,
-    };
-  
-    Gift.findByPk(idPremio)
-      .then((gift) => {
-        if (!gift) {
-          response.status(404).send({
-            status: 404,
-            message: 'Premio non trovato',
-          });
-         
-        }else{
-        
-        return gift.update(updatedGift);}
-      })
-      .then(() => {
+     
+   
+    const gift=Gift.findByPk(idPremio)
+    if(gift){
+         gift.set({
+            nomeRegalo:`${nomeRegalo}`,
+            descrizione:`${descrizione}`,
+            numeroPunti:`${numeroPunti}`,
+
+
+        })
+        await gift.save();
         response.status(200).send({
-          status: 200,
-          message: 'Premio modificato con successo',
-        });
-      })
-      .catch((err) => {
-        response.status(500).send({
-          status: 500,
-          message: 'Errore nella modifica del premio',
-        });
-      });
+            status:200,
+            messagge:"gift aggiornata"
+        })
+    }else
+    response.status(401).send({
+        status:401,
+        messagge:"gift non aggiornata"
+    })
+      
   };
   
 

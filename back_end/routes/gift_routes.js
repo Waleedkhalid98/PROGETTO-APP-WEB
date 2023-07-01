@@ -6,7 +6,7 @@ module.exports= app=>{
     router.post("/creaPremi", jwt.authenticateToken,giftController.creaPremi);
     router.get("/prendiPremi",jwt.authenticateToken, giftController.prendiPremi);
     router.post("/eliminaPremi",jwt.authenticateToken,giftController.eliminaPremi); 
-    router.put("/modificaPremi",giftController.modificaPremio);
+    router.post("/modificaPremi",giftController.modificaPremio);
 
 
 

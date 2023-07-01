@@ -5,6 +5,8 @@ module.exports= app=>{
     router.post("/creazioneEmp",employeeController.creazioneEmp);
     router.post("/logIn",employeeController.logIn);
     router.post("/logOut",employeeController.logOut);
+    router.post("/refreshToken",employeeController.refreshToken);
+
 
 
     app.use('/api/employee', router) ;
