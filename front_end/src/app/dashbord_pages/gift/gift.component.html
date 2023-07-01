@@ -2,9 +2,10 @@
 <div *ngIf="isEmployee && userType">
   <button mat-button class="custom-button" (click)="mostraCreaGift()"> CREA REGALO </button>
   <button mat-button class="custom-button" (click)="eliminaRegali()"> ELIMINA REGALO </button>
-  <button mat-button class="custom-button" (click)="mostraRegali()"> VISUALIZZA REGALO </button>
+  <button mat-button class="custom-button" (click)="mostraRegali()"> VISUALIZZA REGALI </button>
 
   <!--------------CREA REGALO  ------------->
+
   <div class="login page" *ngIf="creaRegalo">
     <div>
       <mat-card-title style="text-align:center;">Regalo</mat-card-title>
@@ -38,6 +39,7 @@
   </div>
 
   <!--------------ELIMINA REGALO  ------------->
+
   <div class="login page" *ngIf="eliminaRegalo">
     <div>
       <mat-card-title style="text-align:center;">Regalo</mat-card-title>
@@ -60,8 +62,7 @@
 
   </div>
 
-
-
+  <!--------------MOSTRA REGALI  ------------->
 
   <div class="card-container" *ngIf="mostraRegalo">
     <mat-card class="example-card" *ngFor=" let gift of cardGift">
@@ -71,7 +72,7 @@
         <mat-card-subtitle>{{gift.descrizione}}</mat-card-subtitle>
       </mat-card-header>
       <img mat-card-image src="https://freeiconshop.com/wp-content/uploads/edd/gift-flat.png"
-        alt="Photo of a Shiba Inu">
+        alt="foto regalo">
       <mat-card-content>
         <mat-card-subtitle>PUNTI :{{gift.numeroPunti}}</mat-card-subtitle>
       </mat-card-content>
@@ -82,7 +83,7 @@
   </div>
 
 
-  <div class="login page" *ngIf="modificaRegalo" >
+  <div *ngIf="modificaRegalo" >
     <div>
       <mat-card-title style="text-align:center;">Modifica Regalo</mat-card-title>
       <mat-tab-group mat-stretch-tabs class="example-stretched-tabs">
@@ -115,24 +116,25 @@
   </div>
 
 
-
 </div>
 
 
 
 
 <!-------------- SEZIONE REGALO USER ------------->
+
 <div *ngIf="!isEmployee && userType">
+
   <h2 >REGALI DISPONIBILI</h2>
   <div class="card-container">
-
     <mat-card class="example-card" *ngFor=" let gift of cardGift">
       <mat-card-header>
         <div mat-card-avatar class="example-header-image"></div>
         <mat-card-title>{{gift.nomeRegalo}}</mat-card-title>
         <mat-card-subtitle>{{gift.descrizione}}</mat-card-subtitle>
       </mat-card-header>
-      <img mat-card-image src="https://bebraveboutique.it/cdn/shop/products/istockphoto-1128262881-170667a.jpg?v=1648818692" alt="Photo of a Shiba Inu">
+      <img mat-card-image src="https://freeiconshop.com/wp-content/uploads/edd/gift-flat.png"
+       alt="foto regalo">
       <mat-card-content>
         <p>
           PUNTI {{gift.numeroPunti}}
@@ -142,13 +144,6 @@
         <button mat-button>RISCATTA</button>
       </mat-card-actions>
     </mat-card>
-
-
-
-
-
   </div>
-
-
 
 </div>

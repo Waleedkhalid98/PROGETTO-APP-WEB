@@ -176,6 +176,12 @@ export class GiftComponent implements OnInit {
   displayedColumns: string[] = ['id', 'nome', 'cognome', 'email'];
   //BOTTONE CHE PERMETTE DI CREARE DEI PREMI 
   button() {
+    const token = localStorage.getItem('accessToken');
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + token
+      })
+    };
     const nomeRegalo = this.form.value.nomeRegalo;
     const descrizione = this.form.value.descrizione;
     const numeroPunti = this.form.value.numeroPunti;
@@ -183,7 +189,7 @@ export class GiftComponent implements OnInit {
       nomeRegalo: nomeRegalo,
       descrizione: descrizione,
       numeroPunti: numeroPunti
-    }
+    },httpOptions
     ).subscribe(
       response => {
         this.data = response;
@@ -212,10 +218,16 @@ export class GiftComponent implements OnInit {
 
   //BOTTONE CHE PERMETTE DI ELIMINARE DEI REGALI 
   buttonDelete() {
+    const token = localStorage.getItem('accessToken');
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + token
+      })
+    };
     const nomeRegalo = this.form2.value.nomeRegalo;
   
     this.httpclient.post(`${enviroment.baseUrl}/gift/eliminaPremi`,
-     {nomeRegalo: nomeRegalo}).subscribe(
+     {nomeRegalo: nomeRegalo},httpOptions).subscribe(
       response => {
         this.data = response;
         if (this.data.status == 200) {

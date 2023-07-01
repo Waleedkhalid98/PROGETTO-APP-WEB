@@ -1,18 +1,4 @@
-.login-page {
-    background-size: cover;
-    background-image: url("https://png.pngtree.com/background/20230524/original/pngtree-background-blurred-blue-light-with-movement-business-presentation-vector-template-used-picture-image_2712412.jpg");
-    top: 0;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    display: block;
-    background-color: #303F9F;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    overflow: hidden;
-}
+
 
 mat-card {
     width: 30%;
@@ -99,7 +85,13 @@ table {
     border-top-right-radius: 8px;
   }
   
+
   h2 {
+    font-size: 24px;
+    color: #4285F4;
+    text-shadow: 2px 2px 4px #000000;
+    background-color: #E8E8E8;
+    padding: 10px;
+    border-radius: 5px;
     text-align: center;
   }
-  

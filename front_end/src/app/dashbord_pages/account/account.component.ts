@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { enviroment } from 'src/environments/environments.prod';
+import { Employee } from 'src/app/models/employee';
 import { User } from 'src/app/models/user';
-
+import { UserService } from 'src/app/service/user.service';
 
 
 
@@ -36,6 +37,10 @@ export class AccountComponent implements OnInit {
 
   TabUser: User[] = [];
 
+  userType: User | Employee | undefined;
+
+  isEmployee: boolean | undefined;
+
 
 
 
@@ -53,7 +58,7 @@ export class AccountComponent implements OnInit {
   constructor(
     private formbuilder: FormBuilder,
     private httpclient: HttpClient,
-
+    private userService: UserService,
 
 
   ) {
@@ -107,7 +112,13 @@ export class AccountComponent implements OnInit {
   }
 
   fetchData() {
-    this.httpclient.get<any>(`${enviroment.baseUrl}/user/prendiUtenti`).subscribe(
+    const token = localStorage.getItem('accessToken');
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + token
+      })
+    };
+    this.httpclient.get<any>(`${enviroment.baseUrl}/user/prendiUtenti`,httpOptions).subscribe(
       response => {
         this.data = response;
         if (this.data.status == 200) {
@@ -134,6 +145,12 @@ export class AccountComponent implements OnInit {
 
 
   button() {
+    const token = localStorage.getItem('accessToken');
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + token
+      })
+    };
     const nome = this.form.value.nome;
     const cognome = this.form.value.cognome;
     const email = this.form.value.email;
@@ -142,13 +159,16 @@ export class AccountComponent implements OnInit {
 
 
 
-
+    if(password != repassword){
+      alert("password non coincidono")
+      return
+    }
     this.httpclient.post(`${enviroment.baseUrl}/user/creaUser`, {
       nome: nome,
       cognome: cognome,
       email: email,
       password: password
-    }
+    },httpOptions
     ).subscribe(
       response => {
         this.data = response;
@@ -173,11 +193,17 @@ export class AccountComponent implements OnInit {
       }
 
     )
-    console.log('funzia')
+  
   }
 
 
   buttondelete() {
+    const token = localStorage.getItem('accessToken');
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + token
+      })
+    };
     const nome = this.form.value.nome;
     const email = this.form.value.email;
 
@@ -185,7 +211,7 @@ export class AccountComponent implements OnInit {
       nome: nome,
       email: email
 
-    }
+    },httpOptions
     ).subscribe(
       response => {
         this.data = response;
@@ -212,9 +238,9 @@ export class AccountComponent implements OnInit {
     console.log('funzia')
   }
 
-  resetData(){
+  resetData() {
     this.form.reset()
-    this.data= null
+    this.data = null
   }
 
 

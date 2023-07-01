@@ -8,6 +8,7 @@ import { DashbordPagesComponent } from './dashbord_pages/dashbord-pages.componen
 import { AccountComponent } from './dashbord_pages/account/account.component';
 import { CardComponent } from './dashbord_pages/card/card.component';
 import { GiftComponent } from './dashbord_pages/gift/gift.component';
+import { AuthGuard } from './authentication/services/auth.guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -17,20 +18,20 @@ const routes: Routes = [
   { path: 'sign_up_employees', component: LoginEmployeesComponent },
 
   {
-    path: 'dash/employee', component: DashbordPagesComponent,
+    path: 'dash/employee', component: DashbordPagesComponent,canActivate:[AuthGuard],
     children: [
-      {path: 'account', component : AccountComponent},
-      {path: 'card', component : CardComponent},
-      {path: 'gift', component : GiftComponent},
+      {path: 'account', component : AccountComponent, canActivate:[AuthGuard]},
+      {path: 'card', component : CardComponent,canActivate:[AuthGuard]},
+      {path: 'gift', component : GiftComponent,canActivate:[AuthGuard]},
 
 
  ]
   },
   {
-    path: 'dash/user', component: DashbordPagesComponent,
+    path: 'dash/user', component: DashbordPagesComponent,canActivate:[AuthGuard],
     children: [
-      {path: 'card', component : CardComponent},
-      {path: 'gift', component : GiftComponent},
+      {path: 'card', component : CardComponent,canActivate:[AuthGuard]},
+      {path: 'gift', component : GiftComponent,canActivate:[AuthGuard]},
     ]
   }
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { enviroment } from 'src/environments/environments.prod';
 import { UserService } from 'src/app/service/user.service';
 import { Router } from '@angular/router';
@@ -19,7 +19,8 @@ export class CardComponent implements OnInit {
 
   userType: User | Employee | undefined;
   isEmployee: boolean | undefined;
-  card: Card| undefined
+
+  card: Card | undefined
   isUser: any
   data: any
   MostraCreaCarta = true
@@ -27,6 +28,7 @@ export class CardComponent implements OnInit {
   mostraSottraiCarta = false
   mostraAggiungiCarta = false
   mostraVisualizzaCarta = false
+  possiediCarta=false
   carteUtenti: Card[] = []
 
 
@@ -110,7 +112,7 @@ export class CardComponent implements OnInit {
 
     } else if (this.userType instanceof User) {
       this.isEmployee = false;
-      this.prendiCarta() 
+      this.prendiCarta()
 
     }
   }
@@ -140,9 +142,15 @@ export class CardComponent implements OnInit {
     })
   }
 
-
+  //VISUALIZZA CARTE UTENTI
   fetchData() {
-    this.httpclient.get<any>(`${enviroment.baseUrl}/card/prendiCarte`).subscribe(
+    const token = localStorage.getItem('accessToken');
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + token
+      })
+    };
+    this.httpclient.get<any>(`${enviroment.baseUrl}/card/prendiCarte`, httpOptions).subscribe(
       response => {
         this.data = response;
         if (this.data.status == 200) {
@@ -162,9 +170,17 @@ export class CardComponent implements OnInit {
     );
   }
 
-  displayedColumns: string[] = ['id','idUtente', 'codice', 'punti'];
+  displayedColumns: string[] = ['id', 'idUtente', 'codice', 'punti'];
+
+
   //metodo per creare carta
   button() {
+    const token = localStorage.getItem('accessToken');
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + token
+      })
+    };
     const nome = this.form.value.nome;
     const cognome = this.form.value.cognome;
     const codice = this.form.value.codice;
@@ -178,7 +194,7 @@ export class CardComponent implements OnInit {
       cognome: cognome,
       codice: codice,
       punti: punti,
-    }
+    }, httpOptions
     ).subscribe(
       response => {
         this.data = response;
@@ -207,13 +223,19 @@ export class CardComponent implements OnInit {
 
   //elimina carta
   buttondelete() {
+    const token = localStorage.getItem('accessToken');
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + token
+      })
+    };
     const id = this.quartoForm.value.id;
     console.log("dentro")
     console.log(id)
 
     this.httpclient.post(`${enviroment.baseUrl}/card/rimuoviCarta`, {
       id: id,
-    }
+    }, httpOptions
     ).subscribe(
       response => {
         this.data = response;
@@ -242,6 +264,12 @@ export class CardComponent implements OnInit {
 
   //metodo per aggiungere i punti clienti
   button2() {
+    const token = localStorage.getItem('accessToken');
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + token
+      })
+    };
     const codice = this.terzoForm.value.codice;
     const punti = this.terzoForm.value.punti;
 
@@ -251,7 +279,7 @@ export class CardComponent implements OnInit {
     this.httpclient.post(`${enviroment.baseUrl}/card/aggiungiPunti`, {
       codice: codice,
       punti: punti,
-    }
+    }, httpOptions
     ).subscribe(
       response => {
         this.data = response;
@@ -280,6 +308,12 @@ export class CardComponent implements OnInit {
 
   //metodo per togliere i punti clienti
   button3() {
+    const token = localStorage.getItem('accessToken');
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + token
+      })
+    };
     const codice = this.secondoForm.value.codice;
     const punti = this.secondoForm.value.punti;
 
@@ -289,7 +323,7 @@ export class CardComponent implements OnInit {
     this.httpclient.post(`${enviroment.baseUrl}/card/rimuoviPunti`, {
       codice: codice,
       punti: punti,
-    }
+    }, httpOptions
     ).subscribe(
       response => {
         this.data = response;
@@ -325,20 +359,35 @@ export class CardComponent implements OnInit {
   }
 
   prendiCarta() {
-    if( this.userType)
-    { console.log(this.userType.id)
-      this.httpclient.get(`${enviroment.baseUrl}/card/prendiCarta/${this.userType.id }`, 
-    ).subscribe(
-      response => {
-        this.data = response;
-        if (this.data.status == 200) {
-          this.card = this.data.data
+    if (this.userType instanceof User) {
+      const token = localStorage.getItem('accessToken');
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Authorization': 'Bearer ' + token
+        })
+      };
+      console.log(this.userType.id)
+      this.httpclient.get(`${enviroment.baseUrl}/card/prendiCarta/${this.userType.id}`, httpOptions).subscribe(
+        response => {
+          this.data = response;
+          if (this.data.status == 200) {
+            this.possiediCarta=true
+            this.card = this.data.data
 
+          }
+        }, error => {
+          this.data= error 
+          if(this.data.status==402) {
+            this.possiediCarta=false
+          }else {
+            this.possiediCarta=false
+          }
         }
-      }
+        
 
-    )}
-    
+      )
+    }
+
   }
 
 }

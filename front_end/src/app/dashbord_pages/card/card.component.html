@@ -1,6 +1,7 @@
 <!-------------- CARD USER ------------->
 
-<div class="login-page" *ngIf="!isEmployee && userType">
+<div class="login-page" *ngIf="!isEmployee && userType && possiediCarta" >
+    <h2>CARTA FEDELTA'</h2>
    <div *ngIf="card && userType ">
     <mat-card class="example-card">
         <mat-card-header>
@@ -15,6 +16,10 @@
             </p>
         </mat-card-content>
     </mat-card>
+   </div>
+
+   <div *ngIf="!isEmployee && userType && !possiediCarta">
+    <h2 >"NON POSSIEDI LA CARTA"</h2>
    </div>
     
 
