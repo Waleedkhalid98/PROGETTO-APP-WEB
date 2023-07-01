@@ -91,7 +91,6 @@ exports.creaCartaEmp = (request, response) => {
 
 }
 
-
 //METODO PER ELMINARE CARTA UTENTE
 exports.rimuoviCarta = async (request, response) => {
 
@@ -117,7 +116,6 @@ exports.rimuoviCarta = async (request, response) => {
         })
     }
 }
-
 
 //METODO PER VISUALIZZARE TUTTE LE CARTE
 exports.prendiCarte = (request, response) => {

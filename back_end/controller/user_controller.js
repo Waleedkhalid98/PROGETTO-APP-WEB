@@ -1,11 +1,6 @@
 const dbconnection = require('../config/dbconnection')
 const User = require('../models/user')
-const Card = require('../models/card')
 const jwt = require('../jwt/controllerJwt')
-
-
-
-
 const bcrypt = require("bcrypt")
 const secret = "xxjjkk123!!à"
 
@@ -222,7 +217,7 @@ exports.logIn = async (request, response) => {
     })
 }
 
-//METODO refresh 
+//METODO REFRESH TOKEN 
 exports.refreshToken = async (req, res) => {
     let refreshToken = req.body.refreshToken;
   
@@ -250,7 +245,7 @@ exports.refreshToken = async (req, res) => {
     });
   }
 
-  //logout
+  //LOGOUT USER
   exports.logOut = async (req, res) => {
     let refreshToken = req.body.refreshToken;
   

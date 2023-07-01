@@ -99,7 +99,7 @@ exports.logIn = async (request, response) => {
     })
 }
 
-
+//METODO LOGOUT EMPLOYEE
 exports.logOut = async (request, response) => {
     let refreshToken = request.body.refreshToken;
   
@@ -129,12 +129,7 @@ exports.logOut = async (request, response) => {
     });
   }
 
-
-
-
-
-
-
+  //METODO REFRESH TOKEN
     exports.refreshToken = async (req, res) => {
         let refreshToken = req.body.refreshToken;
       
