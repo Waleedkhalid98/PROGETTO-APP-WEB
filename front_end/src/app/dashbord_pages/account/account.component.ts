@@ -26,20 +26,12 @@ export class AccountComponent implements OnInit {
   isEmployee: boolean | undefined;
 
   user: User | undefined
+
   mostraFormModificaP= false
   mostraFormModifica = false
   mostraInfo = true
-
   showInformation = true;
-
-  //Boolean variables to indicate if the User want to update the email.
-  showFormUpdateEmail = false;
-
-  //Boolean variables to indicate if the User or Employee want to update the password.
-  showFormUpdatePassword = false;
-
   data: any;
-  isUser: any
   form !: FormGroup
 
   //condizioni div iniziali
@@ -79,13 +71,22 @@ export class AccountComponent implements OnInit {
   }
 
   mostraFormEmail() {
-    this.mostraFormModifica = !this.mostraFormModifica
-    this.showInformation = !this.showInformation
+    this.mostraFormModifica = true
+    this.mostraFormModificaP= false
+    this.showInformation = false
+
 
   }
   mostraFormPass(){
-    this.mostraFormModificaP= !this.mostraFormModificaP
-    this.showInformation = !this.showInformation
+    this.mostraFormModificaP= true
+    this.mostraFormModifica = false
+    this.showInformation = false
+  }
+  mostraInformazioni(){
+    this.showInformation=true
+    this.mostraFormModifica=false
+    this.mostraFormModificaP=false
+
   }
 
   //metodo ngInit
@@ -334,20 +335,20 @@ export class AccountComponent implements OnInit {
   }
 
   closeUpdatePassword() {
-    this.showFormUpdatePassword = false;
+    this.mostraFormModificaP = false;
     this.resetData();
 
   }
 
 
   closeUpdateEmail() {
-    this.showFormUpdateEmail = false;
+    this.mostraFormModifica = false;
     this.resetData();
 
   }
   annulla() {
     this.mostraFormModifica = false;
-    this.showFormUpdatePassword = false;
+    this.mostraFormModificaP = false;
     this.showInformation = true
     this.resetData();
   }
