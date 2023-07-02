@@ -10,6 +10,8 @@ module.exports= app=>{
     router.post("/logIn",userController.logIn);
     router.post("/logOut",userController.logOut);
     router.post("/refreshToken",userController.refreshToken);
+    router.get("/prendiDatiUtente/:id",jwt.authenticateToken,userController.prendiDatiUtenteId);
+
 
 
 

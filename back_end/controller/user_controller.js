@@ -274,6 +274,35 @@ exports.refreshToken = async (req, res) => {
       message: "Logout Successfull.",
     });
   }
+  
+  //METODO PER VISUALIZZARE I DATI DI UN SINGOLO UTENTE TRAMITE ID
+  exports.prendiDatiUtenteId = (request, response) => {
+    if (request.params.id == "") {
+        response.status(400).send({
+            message: "dati assenti",
+            status: 400
+        })
+    }
+    User.findOne({
+        where: {
+            id: request.params.id
+
+        }
+    }).then(data => {
+        if (data) {
+            response.status(200).send({
+                message: "user preso",
+                data,
+                status: 200
+            })
+        } else {
+            response.status(402).send({
+                message: "user non preso",
+                status: 402
+            })
+        }
+    })
+}
 
 
 

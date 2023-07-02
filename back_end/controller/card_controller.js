@@ -171,7 +171,7 @@ exports.prendiCarta = (request, response) => {
 
 };
 
-
+//METODO PER VISUALIZZARE CARTA SINGOLA UTENTE TRAMITE ID 
 exports.prendiCartaIdUtente = (request, response) => {
     if (request.params.id == "") {
         response.status(400).send({
@@ -199,54 +199,6 @@ exports.prendiCartaIdUtente = (request, response) => {
         }
     })
 }
-
-
-exports.prendiCartaUtente = (request, response) => {
-    if (request.body.nome === "" || request.body.cognome === "") {
-        response.status(400).send({
-            message: "dati assenti",
-            status: 400
-        });
-    }
-
-    const nome = request.body.nome;
-    const cognome = request.body.cognome;
-    User.findAll({
-        where: {
-            nome: nome,
-            cognome: cognome
-        }
-    }).then(utenti => {
-        if (utenti.length > 0) {
-            const arrayid = utenti.map(utente => utente.id);
-            Card.findAll({
-                where: {
-                    id: {
-                        $in: arrayid
-                    }
-                }
-            }).then(data => {
-                if (data.length > 0) {
-                    response.status(200).send({
-                        message: "card presa",
-                        data,
-                        status: 200
-                    });
-                } else {
-                    response.status(402).send({
-                        message: "card non presa",
-                        status: 402
-                    });
-                }
-            });
-        } else {
-            response.status(404).send({
-                message: "Utente non trovato",
-                status: 404
-            });
-        }
-    });
-};
 
 
 //METODO PER AGGIUNGERE PUNTI ALLA CARTA
