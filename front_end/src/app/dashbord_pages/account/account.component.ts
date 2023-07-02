@@ -8,65 +8,45 @@ import { UserService } from 'src/app/service/user.service';
 
 
 
-
-
-
-
-export interface PeriodicElement {
-  id: number;
-  nome: string;
-  cognome: string;
-  email: string;
-  password: string;
-  salt: string;
-  createdAt: Date;
-  updatedAt: Date;
-}
-
-
-
-
-
-
 @Component({
   selector: 'app-account',
   templateUrl: './account.component.html',
   styleUrls: ['./account.component.scss']
 })
+
 export class AccountComponent implements OnInit {
 
+  //variabili
   TabUser: User[] = [];
+
+  displayedColumns: string[] = ['id', 'nome', 'cognome', 'email'];
 
   userType: User | Employee | undefined;
 
   isEmployee: boolean | undefined;
 
-
-
-
-
-
-
+  user: User | undefined
 
   data: any;
   isUser: any
   form !: FormGroup
+
+  //condizioni div iniziali
   mostraCarta = true
   creaUtente = false
   eliminaUtente = false
 
+  //costruttore
   constructor(
     private formbuilder: FormBuilder,
     private httpclient: HttpClient,
     private userService: UserService,
-
-
   ) {
 
   }
 
 
-  // metodi per i bottoni
+  // metodi per cambiare le condizioni dei div 
   mostraUtenti() {
     this.mostraCarta = true
     this.creaUtente = false
@@ -87,20 +67,25 @@ export class AccountComponent implements OnInit {
 
   }
 
-
+  //metodo ngInit
   ngOnInit(): void {
-    this.initForm()
-    this.isUser = false
-    this.fetchData(); // Chiamata al metodo per ottenere i dati all'inizio
 
+    this.initForm();
+    this.userType = this.userService.getUser();
+    if (this.userType instanceof Employee) {
+      this.isEmployee = true;
+      this.fetchData();
+
+
+    } else if (this.userType instanceof User) {
+      this.isEmployee = false;
+      this.prendiDati();
+    }
 
   }
 
 
-
-
-
-
+  //initForm
   initForm() {
     this.form = this.formbuilder.group({
       nome: ['', Validators.required],
@@ -109,8 +94,34 @@ export class AccountComponent implements OnInit {
       password: ['', Validators.required],
       repassword: ['', Validators.required],
     })
+
   }
 
+  //metodo che permette all'utente di visualizzare i suoi dati
+  prendiDati() {
+    if (this.userType instanceof User) {
+      const token = localStorage.getItem('accessToken');
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Authorization': 'Bearer ' + token
+        })
+      };
+      console.log(this.userType.id)
+      this.httpclient.get(`${enviroment.baseUrl}/user/prendiDatiUtente/${this.userType.id}`, httpOptions).subscribe(
+        response => {
+          this.data = response;
+          if (this.data.status == 200) {
+
+            this.user = this.data.data
+
+          }
+        }
+      )
+    }
+
+  }
+
+  //metodo che permette all'employee di vedere la lista di utenti
   fetchData() {
     const token = localStorage.getItem('accessToken');
     const httpOptions = {
@@ -118,7 +129,7 @@ export class AccountComponent implements OnInit {
         'Authorization': 'Bearer ' + token
       })
     };
-    this.httpclient.get<any>(`${enviroment.baseUrl}/user/prendiUtenti`,httpOptions).subscribe(
+    this.httpclient.get<any>(`${enviroment.baseUrl}/user/prendiUtenti`, httpOptions).subscribe(
       response => {
         this.data = response;
         if (this.data.status == 200) {
@@ -138,12 +149,7 @@ export class AccountComponent implements OnInit {
     );
   }
 
-  displayedColumns: string[] = ['id', 'nome', 'cognome', 'email'];
-
-
-
-
-
+  //metodo che permette all'employee di creare un cliente nuovo
   button() {
     const token = localStorage.getItem('accessToken');
     const httpOptions = {
@@ -159,7 +165,7 @@ export class AccountComponent implements OnInit {
 
 
 
-    if(password != repassword){
+    if (password != repassword) {
       alert("password non coincidono")
       return
     }
@@ -168,7 +174,7 @@ export class AccountComponent implements OnInit {
       cognome: cognome,
       email: email,
       password: password
-    },httpOptions
+    }, httpOptions
     ).subscribe(
       response => {
         this.data = response;
@@ -193,10 +199,10 @@ export class AccountComponent implements OnInit {
       }
 
     )
-  
+
   }
 
-
+  //metodo che permette all'employee di eliminare un utente
   buttondelete() {
     const token = localStorage.getItem('accessToken');
     const httpOptions = {
@@ -211,7 +217,7 @@ export class AccountComponent implements OnInit {
       nome: nome,
       email: email
 
-    },httpOptions
+    }, httpOptions
     ).subscribe(
       response => {
         this.data = response;
@@ -238,6 +244,11 @@ export class AccountComponent implements OnInit {
     console.log('funzia')
   }
 
+
+
+
+
+  //resetta la form 
   resetData() {
     this.form.reset()
     this.data = null

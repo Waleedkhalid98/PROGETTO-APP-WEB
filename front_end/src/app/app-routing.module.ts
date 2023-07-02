@@ -30,6 +30,7 @@ const routes: Routes = [
   {
     path: 'dash/user', component: DashbordPagesComponent,canActivate:[AuthGuard],
     children: [
+      {path: 'account', component : AccountComponent,canActivate:[AuthGuard]},
       {path: 'card', component : CardComponent,canActivate:[AuthGuard]},
       {path: 'gift', component : GiftComponent,canActivate:[AuthGuard]},
     ]

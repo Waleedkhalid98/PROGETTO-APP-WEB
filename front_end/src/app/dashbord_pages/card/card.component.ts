@@ -17,10 +17,13 @@ import { User } from 'src/app/models/user';
 })
 export class CardComponent implements OnInit {
 
+  //variabili
   userType: User | Employee | undefined;
+
   isEmployee: boolean | undefined;
 
   card: Card | undefined
+
   isUser: any
   data: any
   MostraCreaCarta = true
@@ -28,27 +31,26 @@ export class CardComponent implements OnInit {
   mostraSottraiCarta = false
   mostraAggiungiCarta = false
   mostraVisualizzaCarta = false
-  possiediCarta=false
+  possiediCarta = false
   carteUtenti: Card[] = []
 
 
-
+  //più form diversi per ogni div in questa sezione 
   form !: FormGroup
   secondoForm !: FormGroup;
   terzoForm !: FormGroup;
   quartoForm !: FormGroup;
 
-
+  //costruttore
   constructor(
     private formbuilder: FormBuilder,
     private httpclient: HttpClient,
-    private router: Router,
     private userService: UserService,
   ) {
 
   }
 
-
+  //metodi che cambiano le condizioni per visualizzare i div 
   creaCarte() {
     this.MostraCreaCarta = true
     this.mostraSottraiCarta = false
@@ -99,9 +101,7 @@ export class CardComponent implements OnInit {
 
   }
 
-
-
-
+  //metodo ngOnInit
   ngOnInit(): void {
     this.initForm()
     this.userType = this.userService.getUser();
@@ -117,6 +117,7 @@ export class CardComponent implements OnInit {
     }
   }
 
+  //initForm
   initForm() {
 
     this.quartoForm = this.formbuilder.group({
@@ -142,7 +143,7 @@ export class CardComponent implements OnInit {
     })
   }
 
-  //VISUALIZZA CARTE UTENTI
+  //visualizza tutte le carte degli utenti
   fetchData() {
     const token = localStorage.getItem('accessToken');
     const httpOptions = {
@@ -187,8 +188,6 @@ export class CardComponent implements OnInit {
     const punti = this.form.value.punti;
 
 
-
-
     this.httpclient.post(`${enviroment.baseUrl}/card/createCardEmp`, {
       nome: nome,
       cognome: cognome,
@@ -218,7 +217,7 @@ export class CardComponent implements OnInit {
       }
 
     )
-    console.log('funzia')
+    
   }
 
   //elimina carta
@@ -273,9 +272,6 @@ export class CardComponent implements OnInit {
     const codice = this.terzoForm.value.codice;
     const punti = this.terzoForm.value.punti;
 
-
-
-
     this.httpclient.post(`${enviroment.baseUrl}/card/aggiungiPunti`, {
       codice: codice,
       punti: punti,
@@ -303,7 +299,7 @@ export class CardComponent implements OnInit {
       }
 
     )
-    console.log('funzia')
+  
   }
 
   //metodo per togliere i punti clienti
@@ -316,9 +312,6 @@ export class CardComponent implements OnInit {
     };
     const codice = this.secondoForm.value.codice;
     const punti = this.secondoForm.value.punti;
-
-
-
 
     this.httpclient.post(`${enviroment.baseUrl}/card/rimuoviPunti`, {
       codice: codice,
@@ -347,8 +340,10 @@ export class CardComponent implements OnInit {
       }
 
     )
-    console.log('funzia')
+    
   }
+
+  //resetto le form
   resetData() {
     this.form.reset()
     this.secondoForm.reset()
@@ -357,7 +352,8 @@ export class CardComponent implements OnInit {
 
 
   }
-
+  
+  //metodo per visualizzare la carta di un utente singolo dalla sezione user
   prendiCarta() {
     if (this.userType instanceof User) {
       const token = localStorage.getItem('accessToken');
@@ -371,19 +367,19 @@ export class CardComponent implements OnInit {
         response => {
           this.data = response;
           if (this.data.status == 200) {
-            this.possiediCarta=true
+            this.possiediCarta = true
             this.card = this.data.data
 
           }
         }, error => {
-          this.data= error 
-          if(this.data.status==402) {
-            this.possiediCarta=false
-          }else {
-            this.possiediCarta=false
+          this.data = error
+          if (this.data.status == 402) {
+            this.possiediCarta = false
+          } else {
+            this.possiediCarta = false
           }
         }
-        
+
 
       )
     }

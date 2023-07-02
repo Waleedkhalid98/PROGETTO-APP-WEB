@@ -254,11 +254,11 @@ export class GiftComponent implements OnInit {
     console.log('funzia')
   }
 
+  //RESETTA TUTTE LE FORM
   resetData(){
     this.form.reset()
     this.form2.reset()
     this.form3.reset()
-
     this.data= null
   }
 }

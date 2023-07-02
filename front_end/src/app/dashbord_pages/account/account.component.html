@@ -1,6 +1,6 @@
 <!-------------- ACCOUNT EMPLOYEE ------------->
 
-<div class="account" *ngIf="isUser==false">
+<div class="account" *ngIf="isEmployee && userType">
     <button mat-button class="custom-button" (click)="mostraUtenti()"> VISUALIZZA UTENTI </button>
     <button mat-button class="custom-button" (click)="creaUtenti()"> CREA UTENTI </button>
     <button mat-button class="custom-button" (click)="eliminaUtenti()"> ELIMINA UTENTI </button>
@@ -71,7 +71,7 @@
     </div>
 
     <!-- TABELLA UTENTI -->
-    
+
     <table mat-table [dataSource]="TabUser" class="mat-elevation-z8" *ngIf="mostraCarta">
 
         <!-- Definizioni delle colonne -->
@@ -100,4 +100,31 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
 
+</div>
+
+<!-------------- ACCOUNT USER ------------->
+
+
+<div *ngIf="!isEmployee && userType">
+    <h2>DATI PERSONALI</h2>
+    <div *ngIf="user && userType ">
+        <form >
+            <mat-card class="form-dati">
+                <mat-card-header>
+                    <mat-card-title>INFORMAZIONI PERSONALI</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <h3 style="margin-top: 15px;">Nome : {{user.nome}}</h3>
+                </mat-card-content>
+                <mat-card-content>
+                    <h3 style="margin-top: 35px;">Cognome : {{user.cognome}}</h3>
+                </mat-card-content>
+                <mat-card-content>
+                    <h3 style="margin-top: 35px;">Email : {{user.email}}</h3>
+                </mat-card-content>
+            </mat-card>
+        </form>
+    </div>
+
+  
 </div>

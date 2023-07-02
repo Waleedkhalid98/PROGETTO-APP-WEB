@@ -13,19 +13,24 @@ import { enviroment } from 'src/environments/environments';
 })
 export class DashbordPagesComponent {
 
+  //variabili
   userType: User | Employee | undefined;
 
   isEmployee: boolean | undefined;
+
   response: any;
 
+
+  //costruttore
   constructor(
-    private authUser: UserService,
     private httpClient: HttpClient,
     private router: Router,
     private userService: UserService,
 
   ){}
 
+  
+  //metodo ngOnInit
   ngOnInit(): void {
     
     this.userType = this.userService.getUser();
@@ -44,6 +49,8 @@ export class DashbordPagesComponent {
   opened= false 
   isUser:any
 
+
+  //metodo logOut 
   logout() {
     console.log("ciao")
     const refreshToken = localStorage.getItem('refreshToken');
