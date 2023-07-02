@@ -11,6 +11,11 @@ module.exports= app=>{
     router.post("/logOut",userController.logOut);
     router.post("/refreshToken",userController.refreshToken);
     router.get("/prendiDatiUtente/:id",jwt.authenticateToken,userController.prendiDatiUtenteId);
+    router.post("/modificaEmail/:id",jwt.authenticateToken,userController.modificaEmail);
+    router.post("/modificaPassword/:id",jwt.authenticateToken,userController.modficaPassword);
+
+
+
 
 
 

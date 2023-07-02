@@ -304,6 +304,86 @@ exports.refreshToken = async (req, res) => {
     })
 }
 
+//METODO PER MODIFICARE EMAIL
+exports.modificaEmail= async (req, res) => {
+    const id = req.params.id;
+    const email = req.body.email;
+  
+    if (!id || !email) {
+      return res.status(400).send({
+        status: 400,
+        message: "dati assenti!"
+      })
+    }
+  
+    const user = await User.findByPk(id);
+  
+    if (user) {
+      user.set({
+        email: `${email}`
+      });
+      await user.save();
+      return res.status(200).send({
+        status: 200,
+        message: "Email aggiornata con successo"
+      });
+    } else {
+      return res.status(404).send({
+        status: 404,
+        message: `Cannot update User with id=${id}. Maybe User was not found!`
+      });
+    }
+}
+
+//METODO PER MODIFICARE PASSWORD
+exports.modficaPassword = async (req, res) => {
+    const id = req.params.id;
+    const oldPassword = req.body.oldPassword + secret;
+    const newPassword = req.body.newPassword + secret;
+  
+    if (!id || !oldPassword || !newPassword) {
+      return res.status(400).send({
+        status: 400,
+        message: "dati assenti"
+      });
+    }
+  
+    const user = await User.findByPk(id);
+  
+    if (user) {
+      if (oldPassword != null && oldPassword != undefined) {
+        const saltUser = user.salt;
+        const hashPassword = await bcrypt.hash(newPassword, saltUser);
+        console.log("New Password : " + hashPassword);
+  
+        return bcrypt.compare(oldPassword, user.password)
+          .then((isMatch) => {
+            console.log("Old : " + oldPassword + "Real : " + user.password);
+            if (!isMatch) {
+              return res.status(404).send({
+                status: 404,
+                message: "Password non corretta",
+              });
+            } else {
+              user.set({
+                password: `${hashPassword}`
+              });
+              user.save();
+              return res.status(200).send({
+                status: 200,
+                message: "Password aggiornata con successo"
+              });
+            }
+          }, err => {
+            return res.status(500).send({
+              status: 500,
+              message: err.message || "Some error occurred while updating the Employee data."
+            });
+          })
+      }
+    }
+  }
+  
 
 
 
