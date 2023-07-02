@@ -4,7 +4,7 @@
     <button mat-button class="custom-button" (click)="mostraUtenti()"> VISUALIZZA UTENTI </button>
     <button mat-button class="custom-button" (click)="creaUtenti()"> CREA UTENTI </button>
     <button mat-button class="custom-button" (click)="eliminaUtenti()"> ELIMINA UTENTI </button>
-
+    
 
     <!-- ELIMINA UTENTI -->
 
@@ -107,8 +107,18 @@
 
 <div *ngIf="!isEmployee && userType">
     <h2>DATI PERSONALI</h2>
+    <div>
+        <button  mat-button class="custom-button" mat-raised-button
+        (click)="mostraFormEmail()">Modifica Email
+        </button>
+        <button  mat-button class="custom-button"
+            (click)="mostraFormPass()">Modifica Password
+        </button>
+    </div>
+<!-------------- CARD DATI USER ------------->
+
     <div *ngIf="user && userType ">
-        <form >
+        <form *ngIf="showInformation">
             <mat-card class="form-dati">
                 <mat-card-header>
                     <mat-card-title>INFORMAZIONI PERSONALI</mat-card-title>
@@ -125,6 +135,63 @@
             </mat-card>
         </form>
     </div>
+
+  
+
+    <!------FORM PER MODIFICA PASSWORD---->
+    <form class="formUpdateEmail" *ngIf="mostraFormModifica" [formGroup]="form">
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>MODIFICA EMAIL</mat-card-title>
+            </mat-card-header>
+            <br>
+            <mat-card-content>
+                <h3>Inserisci la nuova email.</h3>
+                <mat-form-field>
+                    <input matInput placeholder="Nuova email" formControlName="email">
+                </mat-form-field>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-button (click)="updateEmail()">Modifica</button>
+                <button mat-button (click)="annulla()">Annulla</button>
+            </mat-card-actions>
+        </mat-card>
+    </form>
+
+    <!------FORM PER AGGIORNAMENTO PASSWORD------->
+    <form class="formUpdatePasswordUser" *ngIf="mostraFormModificaP" [formGroup]="form">
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title style="text-align: center;">MODIFICA PASSWORD</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <h3 style="margin-top: 20px;">Inserisci la password attuale</h3>
+                <mat-form-field>
+                    <input matInput type="password" placeholder="Password"
+                        formControlName="oldPassword">
+                </mat-form-field>
+            </mat-card-content>
+            <mat-card-content>
+                <h3 style="margin-top: 20px;">Inserisci la nuova password</h3>
+                <mat-form-field>
+                    <input matInput type="password" placeholder="Password" formControlName="password">
+                </mat-form-field>
+            </mat-card-content>
+            <mat-card-content>
+                <h3 style="margin-top: 20px;">Reinserisci la nuova password</h3>
+                <mat-form-field>
+                    <input matInput type="password" placeholder="conferma password"
+                        formControlName="confirmPassword">
+                </mat-form-field>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-button (click)="modificaPassowordUser()">Modifica Password</button>
+                <button mat-button (click)="annulla()">Annulla</button>
+            </mat-card-actions>
+        </mat-card>
+    </form>
+
+
 
   
 </div>

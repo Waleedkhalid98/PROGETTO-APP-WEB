@@ -26,6 +26,17 @@ export class AccountComponent implements OnInit {
   isEmployee: boolean | undefined;
 
   user: User | undefined
+  mostraFormModificaP= false
+  mostraFormModifica = false
+  mostraInfo = true
+
+  showInformation = true;
+
+  //Boolean variables to indicate if the User want to update the email.
+  showFormUpdateEmail = false;
+
+  //Boolean variables to indicate if the User or Employee want to update the password.
+  showFormUpdatePassword = false;
 
   data: any;
   isUser: any
@@ -67,6 +78,16 @@ export class AccountComponent implements OnInit {
 
   }
 
+  mostraFormEmail() {
+    this.mostraFormModifica = !this.mostraFormModifica
+    this.showInformation = !this.showInformation
+
+  }
+  mostraFormPass(){
+    this.mostraFormModificaP= !this.mostraFormModificaP
+    this.showInformation = !this.showInformation
+  }
+
   //metodo ngInit
   ngOnInit(): void {
 
@@ -93,6 +114,8 @@ export class AccountComponent implements OnInit {
       email: ['', Validators.required],
       password: ['', Validators.required],
       repassword: ['', Validators.required],
+      oldPassword: ['', Validators.required],
+      confirmPassword: ['', Validators.required]
     })
 
   }
@@ -241,21 +264,99 @@ export class AccountComponent implements OnInit {
       }
 
     )
-    console.log('funzia')
+  }
+
+  //METODO PER MODIFICARE EMAIL
+  updateEmail() {
+    const newEmail = this.form.value.email;
+    const token = localStorage.getItem('accessToken');
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + token
+      })
+    };
+    if (this.userType instanceof User) {
+      this.httpclient.post(`${enviroment.baseUrl}/user/modificaEmail/${this.userType.id}`, { email: newEmail }, httpOptions).subscribe(response => {
+        this.data = response;
+        if (this.data.status == 200) {
+
+          alert("Email aggiornata con successo.");
+          this.closeUpdateEmail();
+        }
+      }, err => {
+        this.data = err;
+        if (this.data.status == 400) {
+          alert("I campi sono vuoti. Operazione non valida.");
+          this.closeUpdateEmail();
+        } else if (this.data.status == 404) {
+          alert("qualcosa è andato storto");
+          this.closeUpdateEmail();
+        }
+      });
+    }
+  }
+
+  modificaPassowordUser() {
+    if (this.userType instanceof User) {
+      if (this.form.value.password === this.form.value.confirmPassword) {
+        const newPassword = this.form.value.confirmPassword;
+        const oldPassword = this.form.value.oldPassword;
+        const token = localStorage.getItem('accessToken');
+        const httpOptions = {
+          headers: new HttpHeaders({
+            'Authorization': 'Bearer ' + token
+          })
+        };
+
+        this.httpclient.post(`${enviroment.baseUrl}/user/modificaPassword/${this.userType.id}`, { oldPassword: oldPassword, newPassword: newPassword }, httpOptions).subscribe(response => {
+          this.data = response;
+          if (this.data.status == 200) {
+            alert("Password aggiornata con successo");
+          }
+        }, err => {
+          this.data = err;
+          if (this.data.status == 400) {
+            alert("I campi sono vuoti. Operazione non valida.");
+            this.closeUpdatePassword();
+          } else if (this.data.status == 404) {
+            alert("Password errata. Riprovare.");
+            this.closeUpdatePassword();
+          } else if (this.data.status == 500) {
+            alert("Something went wrong.");
+            this.closeUpdatePassword();
+          }
+        });
+      } else {
+        alert("Le password non corrispondono. Riprova.");
+      }
+      this.closeUpdatePassword();
+    }
+  }
+
+  closeUpdatePassword() {
+    this.showFormUpdatePassword = false;
+    this.resetData();
+
   }
 
 
+  closeUpdateEmail() {
+    this.showFormUpdateEmail = false;
+    this.resetData();
 
-
+  }
+  annulla() {
+    this.mostraFormModifica = false;
+    this.showFormUpdatePassword = false;
+    this.showInformation = true
+    this.resetData();
+  }
 
   //resetta la form 
   resetData() {
     this.form.reset()
     this.data = null
   }
-
-
-
 
 
 }
